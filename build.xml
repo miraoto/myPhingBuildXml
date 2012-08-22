@@ -18,15 +18,15 @@
     <delete dir="${documentdir}" includeemptydirs="true" />
     <mkdir dir="${documentdir}" />
 
-  	<chmod file="${apppath}/Console/cake" mode="0755" verbose="true" />
-  	<chmod file="${apppath}/tmp/" mode="0777" verbose="true" />
-  	<chmod file="${apppath}/tmp/logs/" mode="0777" verbose="true" />
-  	<chmod file="${apppath}/tmp/sessions/" mode="0777" verbose="true" />
-  	<chmod file="${apppath}/tmp/tests/" mode="0777" verbose="true" />
-  	<chmod file="${apppath}/tmp/cache/" mode="0777" verbose="true" />
-  	<chmod file="${apppath}/tmp/cache/persistent/" mode="0777" verbose="true" />
-  	<chmod file="${apppath}/tmp/cache/models/" mode="0777" verbose="true" />
-  	<chmod file="${apppath}/tmp/cache/views/" mode="0777" verbose="true" />
+    <chmod file="${apppath}/Console/cake" mode="0755" verbose="true" />
+    <chmod file="${apppath}/tmp/" mode="0777" verbose="true" />
+    <chmod file="${apppath}/tmp/logs/" mode="0777" verbose="true" />
+    <chmod file="${apppath}/tmp/sessions/" mode="0777" verbose="true" />
+    <chmod file="${apppath}/tmp/tests/" mode="0777" verbose="true" />
+    <chmod file="${apppath}/tmp/cache/" mode="0777" verbose="true" />
+    <chmod file="${apppath}/tmp/cache/persistent/" mode="0777" verbose="true" />
+    <chmod file="${apppath}/tmp/cache/models/" mode="0777" verbose="true" />
+    <chmod file="${apppath}/tmp/cache/views/" mode="0777" verbose="true" />
   </target>
 
   <!-- checksytle -->
