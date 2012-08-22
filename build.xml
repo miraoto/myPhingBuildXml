@@ -76,13 +76,13 @@
 
   <!-- PHPDocumentor -->
   <target name="phpdoc" description="Generate Application Documentation using PHPDocumentor2">
-    <exec executable="phpdoc">
-      <arg line="
-        run
-        -t ${documentdir}
-        -d ${apppath}/
-        -i ${apppath}/tests/
-        -p" />
-    </exec>
+    <phpdoc2 title="Application Documentation"
+             destdir="${documentdir}"
+             template="responsive">
+      <fileset dir="${apppath}/">
+        <include name="**/*.php" />
+      	<exclude name="**/*Test.php" />
+      </fileset>
+    </phpdoc2>
   </target>
 </project>
