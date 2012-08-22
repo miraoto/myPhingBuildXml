@@ -18,7 +18,7 @@ phingで利用するビルドファイル
 ### PHP
 * [PHP 5.3.3] : http://www.php.net/
 * [CakePHP 2.2.1] : http://cakephp.jp/
-* [phpDocumentor 2.0.0a2] : http://www.phpdoc.org/
+* [phpDocumentor 2.0.0a3] : http://www.phpdoc.org/
 * [PHP_CodeSniffer 1.3.3] : http://pear.php.net/package/PHP_CodeSniffer/redirected
 * [PHPUnit 3.6.12] : http://pear.phpunit.de/
 * [PHPMD 1.3.3] : http://phpmd.org/
