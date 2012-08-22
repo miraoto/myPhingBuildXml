@@ -31,13 +31,12 @@
 
   <!-- checksytle -->
   <target name="phpcs" description="Generate phpcs.xml using PHP_CodeSniffer">
-    <exec executable="phpcs" output="${reportdir}/phpcs.xml" >
-      <arg line="
-        --report=checkstyle
-        --standard=CakePHP
-        --extensions=php
-      	${apppath}" />
-      </exec>
+    <phpcodesniffer
+      standard="CakePHP"
+      file="${apppath}/"
+      allowedFileExtensions="php">
+      <formatter type="checkstyle" outfile="${reportdir}/phpcs.xml"/>
+    </phpcodesniffer>
   </target>
 
   <!-- PHPUnit -->
