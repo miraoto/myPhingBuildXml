@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="ciBuildFile" default="main">
+
+  <!-- property -->
+  <property name="basedir"     value="./" />
+  <property name="reportdir"   value="${basedir}/reports" />
+  <property name="documentdir" value="${basedir}/doc" />
+  <property name="apppath"     value="${basedir}/app" />
+
+
+  <!-- dispatch targer -->
+  <target name="main" depends="init,phpcs,phpunit,phpmd,phpcpd,phpdoc"></target>
+
+  <!-- init -->
+  <target name="init">
+    <delete dir="${reportdir}" includeemptydirs="true" />
+    <mkdir dir="${reportdir}" />
+    <delete dir="${documentdir}" includeemptydirs="true" />
+    <mkdir dir="${documentdir}" />
+
+  	<chmod file="${apppath}/Console/cake" mode="0755" verbose="true" />
+  	<chmod file="${apppath}/tmp/" mode="0777" verbose="true" />
+  	<chmod file="${apppath}/tmp/logs/" mode="0777" verbose="true" />
+  	<chmod file="${apppath}/tmp/sessions/" mode="0777" verbose="true" />
+  	<chmod file="${apppath}/tmp/tests/" mode="0777" verbose="true" />
+  	<chmod file="${apppath}/tmp/cache/" mode="0777" verbose="true" />
+  	<chmod file="${apppath}/tmp/cache/persistent/" mode="0777" verbose="true" />
+  	<chmod file="${apppath}/tmp/cache/models/" mode="0777" verbose="true" />
+  	<chmod file="${apppath}/tmp/cache/views/" mode="0777" verbose="true" />
+  </target>
+
+  <!-- checksytle -->
+  <target name="phpcs" description="Generate phpcs.xml using PHP_CodeSniffer">
+    <exec executable="phpcs" output="${reportdir}/phpcs.xml" >
+      <arg line="
+        --report=checkstyle
+        --standard=CakePHP
+        --extensions=php
+      	${apppath}" />
+      </exec>
+  </target>
+
+  <!-- PHPUnit -->
+  <target name="phpunit">
+    <exec executable="${apppath}/Console/cake">
+      <arg line="
+        test
+        --log-junit=${reportdir}/unittest.xml
+        --coverage-html=${reportdir}/coverage_html
+        --coverage-clover=${reportdir}/coverage.xml
+        app AllTests" />
+    </exec>
+  </target>
+
+  <!-- PHPMD -->
+  <target name="phpmd" description="Generate pmd.xml using PHP Mess Doctor">
+    <phpmd rulesets="codesize,unusedcode,design,naming">
+      <fileset dir="${apppath}/" >
+        <include name="**/*.php" />
+        <exclude name="**/*Test.php" />
+      </fileset>
+      <formatter type="xml" outfile="${reportdir}/pmd.xml"/>
+    </phpmd>
+  </target>
+
+  <!-- PHPCPD -->
+  <target name="phpcpd" description="Generate cpd.xml using PHP Copy Paste Detector">
+    <phpcpd>
+      <fileset dir="${apppath}/">
+        <include name="**/*.php" />
+        <exclude name="**/*Test.php" />
+      </fileset>
+      <formatter type="pmd" outfile="${reportdir}/cpd.xml"/>
+    </phpcpd>
+  </target>
+
+  <!-- PHPDocumentor -->
+  <target name="phpdoc" description="Generate Application Documentation using PHPDocumentor2">
+    <exec executable="phpdoc">
+      <arg line="
+        run
+        -t ${documentdir}
+        -d ${apppath}/
+        -i ${apppath}/tests/
+        -p" />
+    </exec>
+  </target>
+</project>
